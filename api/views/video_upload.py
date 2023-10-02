@@ -45,17 +45,20 @@ def index():
 
 @api_views.route("/video-upload", methods=["POST"])
 def video_upload():
+    """
+    swagger_file: video_upload.yml
+    """
     if "video" not in request.files:
-        return make_response(("video parameter not found", 400))
+        return jsonify({"message": "video parameter not found"}), 400
     video = request.files["video"]
     if video.filename == "":
-        return make_response(("No video selected", 400))
+        return jsonify({"message": "No video selected"}), 400
     file_extension = secure_filename(video.filename).split(".")[-1]
 
     uuid = request.form.get("uuid")
     chunk_idx = int(request.form.get("chunkindex"))
     if None in [uuid, chunk_idx]:
-        return make_response(("Use aprropiate form data", 400))
+        return jsonify({"message": "No uuid or chunkindex"}), 400
 
     folder = Path(current_app.config["TEMPORARY_FOLDER"])
     if not os.path.exists(folder):
@@ -66,7 +69,7 @@ def video_upload():
         with open(filepath, "ab") as file:
             file.write(video.stream.read())
     except OSError:
-        return make_response(("Error writing file to disk", 500))
+        return jsonify({"message": "Error writing file to disk"}), 500
 
     if chunk_idx == -1:
         perm_folder = Path(current_app.config["PERMANENT_FOLDER"])
@@ -80,6 +83,6 @@ def video_upload():
                         str(perm_filepath))
         vid_obj.save()
         vid_obj.transcribe()
-        print(f"\n{vid_obj.id}\n")
+        return jsonify({"message": "Video created succesfully"}), 201
         # Transciption begins
-    return make_response("Upload Successful")
+    return jsonify({"message": "Chunk uploaded"})

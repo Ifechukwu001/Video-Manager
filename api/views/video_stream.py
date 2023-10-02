@@ -1,6 +1,6 @@
 """Stream the Video to client"""
 import os
-from flask import Response, make_response, request, current
+from flask import Response, make_response, request
 from api.views import api_views
 import models
 from models.video import Video
