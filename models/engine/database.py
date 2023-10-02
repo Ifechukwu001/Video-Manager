@@ -26,7 +26,7 @@ class DBStorage:
         self.__session.commit()
 
     def all(self):
-        self.__session.query(Video).all()
+        return self.__session.query(Video).all()
 
     def get(self, cls: Video, id: str):
         return self.__session.query(cls).filter_by(id=id).first()
