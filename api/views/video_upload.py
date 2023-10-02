@@ -82,7 +82,7 @@ def video_upload():
         vid_obj = Video(secure_filename(video.filename),
                         str(perm_filepath))
         vid_obj.save()
-        vid_obj.transcribe()
+        # vid_obj.transcribe()
         return jsonify({"message": "Video created succesfully",
                         "video_id": vid_obj.id}), 201
         # Transciption begins
