@@ -13,6 +13,7 @@ Flask
 flask-swagger @ git+https://github.com/getsling/flask-swagger@23408f4f48d396d8bbce4d7108a3b6cf7f0b0682
 frozenlist
 greenlet
+gunicorn
 idna
 imageio
 imageio-ffmpeg
