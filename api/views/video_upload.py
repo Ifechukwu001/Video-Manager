@@ -83,6 +83,7 @@ def video_upload():
                         str(perm_filepath))
         vid_obj.save()
         vid_obj.transcribe()
-        return jsonify({"message": "Video created succesfully"}), 201
+        return jsonify({"message": "Video created succesfully",
+                        "video_id": vid_obj.id}), 201
         # Transciption begins
     return jsonify({"message": "Chunk uploaded"})

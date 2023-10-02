@@ -1,6 +1,6 @@
 """Stream the Video to client"""
 import os
-from flask import Response, make_response, request
+from flask import Response, make_response, request, jsonify
 from api.views import api_views
 import models
 from models.video import Video
@@ -54,7 +54,7 @@ def get_chunk(filename, byte_start: int = None, byte_end: int = None):
             yielded += remainder
 
 
-@api_views.route("/test-video/<video_id>")
+@api_views.route("/full-video/<video_id>")
 def video(video_id):
     video = models.storage.get(Video, video_id)
 
@@ -77,3 +77,13 @@ def video(video_id):
                             direct_passthrough=True)
         return response
     return make_response(("Invalid Video ID", 404))
+
+
+@api_views.route("/videos")
+def videos():
+    videos = models.storage.all()
+    videos_dict = [{"id": video.id,
+                    "url": f"/full-video/{video.id}",
+                    "transcript": video.transcript
+                    } for video in videos]
+    return jsonify({"videos": videos_dict})
