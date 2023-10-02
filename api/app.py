@@ -12,7 +12,7 @@ app.config["MAX_CONTENT_LENGTH"] = 1024 * 1024 * 2
 app.config["TEMPORARY_FOLDER"] = "./temp"
 app.config["PERMANENT_FOLDER"] = "./Videos"
 
-app.register_blueprint(api_views, )
+app.register_blueprint(api_views, url_prefix="/api")
 
 
 @app.route("/api/docs")

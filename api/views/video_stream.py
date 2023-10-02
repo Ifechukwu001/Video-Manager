@@ -83,7 +83,7 @@ def video(video_id):
 def videos():
     videos = models.storage.all()
     videos_dict = [{"id": video.id,
-                    "url": f"/full-video/{video.id}",
+                    "url": f"/api/full-video/{video.id}",
                     "transcript": video.transcript
                     } for video in videos]
     return jsonify({"videos": videos_dict})

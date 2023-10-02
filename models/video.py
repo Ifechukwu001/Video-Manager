@@ -43,11 +43,12 @@ class Video(Base):
     @classmethod
     def transcribe(cls, filepath):
         filepath = filepath
-        audio_file = f"{filepath.split('.')[0]}.wav"
+        audio_file = "test.wav"
+        # audio_file = f"{filepath.split('.')[0]}.wav"
         try:
-            # with VideoFileClip(filepath) as clip:
-            #     audio = clip.audio
-            #     audio.write_audiofile(audio_file, codec="pcm_s32le")
+            with VideoFileClip(filepath) as clip:
+                audio = clip.audio
+                audio.write_audiofile(audio_file, codec="pcm_s32le")
 
             with open(audio_file, "wb") as file:
                 max_size = 1024 * 1024 * 24
