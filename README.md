@@ -47,7 +47,7 @@ This saves videos in the database and relays them
     }
     ```
 ---
-`/videos`
+`/api/videos`
 - response:
     - "200": All videos stored on the database
     ```
@@ -55,7 +55,7 @@ This saves videos in the database and relays them
         "videos": [
             {
                 "id": "<id>",
-                "uri": "/full-video/<id>",
+                "uri": "/api/full-video/<id>",
                 "transcript": "<transcript>"
             }, ...
         ]
