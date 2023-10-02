@@ -8,7 +8,7 @@ import models
 
 app = Flask(__name__)
 
-app.config["MAX_CONTENT_LENGTH"] = 1024 * 1024 * 2
+app.config["MAX_CONTENT_LENGTH"] = 1024 * 1024 * 5
 app.config["TEMPORARY_FOLDER"] = "./temp"
 app.config["PERMANENT_FOLDER"] = "./Videos"
 
